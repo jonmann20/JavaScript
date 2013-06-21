@@ -85,20 +85,25 @@ MyClass = function () {
 		    }
 
             return j
+		},
+
+		isPowerOf2: function (n) {
+            return (n % 2 == 0) ? true : false
 		}
 	}
 }()
 
 $(function () {
-    MyClass.init()
+    var m = MyClass
+    m.init()
 
-    var num = MyClass.fib(11),
-        arr = MyClass.sort([89,1,4,5,2,6,9,22,1,34,1234,1,10, 55, 9, 4, 18]),
-        idx = MyClass.search(arr, num)
+    var num = m.fib(11),
+        arr = m.sort([89,1,4,5,2,6,9,22,1,34,1234,1,10, 55, 9, 4, 18]),
+        idx = m.search(arr, num)
 
-    console.log('arr[' + idx + ']: ' + arr[idx] + ' ?= ' + num)
+    //console.log('arr[' + idx + ']: ' + arr[idx] + ' ?= ' + num)
+    //console.log(m.removeChar('John', 'h'))
+    //console.log(arr.length - 3 + ' ?= ' + m.findThirdFromLast(arr))
+    console.log(m.isPowerOf2(18))
 
-    console.log(MyClass.removeChar('John', 'h'))
-
-    console.log(arr.length-3 + ' ?= ' + MyClass.findThirdFromLast(arr))
 })
