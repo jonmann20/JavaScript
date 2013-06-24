@@ -4,7 +4,10 @@
 
         },
 
-        bubble: function (a) {
+        bubble: function (a, cmp) {
+
+            cmp = (typeof (cmp) !== 'undefined') ? cmp : compare;
+
             var swapped = true,
                 n = a.length,
                 tmp
@@ -13,7 +16,7 @@
                 swapped = false
 
                 for (var i = 1; i < n; ++i) {
-                    if (a[i-1] > a[i]) {
+                    if (cmp(a[i-1], a[i])) {
                         tmp = a[i-1]
                         a[i-1] = a[i]
                         a[i] = tmp
@@ -23,6 +26,10 @@
                 }
             }
         }
+    }
+
+    function compare(a, b) {
+        return a > b
     }
 }()
 
