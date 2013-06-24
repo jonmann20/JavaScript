@@ -34,14 +34,8 @@
         rotate: function(s, n, goLeft){
             var result = ''
 
-            if (n > s.length) {
-                var div = Math.floor(n / s.length),
-                    n = n % s.length
-
-                if (div % 2 == 0) {
-                    s = this.reverse(s)
-                }
-            }
+            if (n > s.length)
+                n = n % s.length
 
             if (goLeft) {
                 for (var i = n; i < s.length; ++i)

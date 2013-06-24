@@ -18,13 +18,12 @@
     //console.log(s.reverse('amazing'))
     //console.log(s.isPalindrome('hih'))
 
-    console.log(s.rotate('abc', 7, true))
+    for(var i=0; i < 9; ++i)
+        console.log(s.rotate('string', i, false))
 
-    // abc
-    // bca ... 1
-    // cab ... 2
-    // abc ... 3
-    // bca ... 4
+    // abc ... 0,3,6
+    // bca ... 1,4,7
+    // cab ... 2,5,8
 
 
 })
