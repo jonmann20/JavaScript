@@ -18,6 +18,13 @@
     //console.log(s.reverse('amazing'))
     //console.log(s.isPalindrome('hih'))
 
-    console.log(s.rotate('thetime', 9, true))
+    console.log(s.rotate('abc', 7, true))
+
+    // abc
+    // bca ... 1
+    // cab ... 2
+    // abc ... 3
+    // bca ... 4
+
 
 })

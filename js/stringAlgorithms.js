@@ -35,28 +35,29 @@
             var result = ''
 
             if (n > s.length) {
+                var div = Math.floor(n / s.length),
+                    n = n % s.length
 
+                if (div % 2 == 0) {
+                    s = this.reverse(s)
+                }
             }
 
             if (goLeft) {
-                for (var i = n; i < s.length; ++i) {
+                for (var i = n; i < s.length; ++i)
                     result += s[i]
-                }
 
-                for (var i = 0; i < n; ++i) {
+                for (var i = 0; i < n; ++i)
                     result += s[i]
-                }
             }
             else {
                 var j=s.length-n
 
-                for (var i = 0; i < n; ++i) {
+                for (var i = 0; i < n; ++i)
                     result += s[j++]
-                }
 
-                for (var i = 0; i < s.length - n; ++i) {
+                for (var i = 0; i < s.length - n; ++i)
                     result += s[i]
-                }
             }
 
             return result
