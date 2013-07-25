@@ -71,27 +71,36 @@ var GlobalNav = function () {
         mouseDevice: function () {
             //console.log('is mouse device');
 
-            // hovering on mainNav li
-            mainNav.hover(function (e) {
-                e.stopPropagation();
-                subNav.removeClass('isHover');
-
+        mainNav.hoverIntent({
+            over: function () {
                 var nextSubNav = $('header .hdrNav3 .page').find('ul:eq(' + ($(this).index() + 1) + ')');
 
-                if (nextSubNav.html().length > 0) {
-                    nextSubNav.show();
+                if (nextSubNav.html().length) {
+                    nextSubNav.slideDown();
                     $(this).addClass('active');
                 }
-            });
+            },
+            out: function () {},
+            interval: 30
+        });
 
-            // reset nav if not hovering on mainNav li, subNav, or subNav's elts
-            $('body :not(header .hdrNav3 .mainNav > li, header .hdrNav3 .subNav, header .hdrNav3 .subNav *)').hover(function () {
+        mainNav.hover(function () { }, function () {
+            if (!$(subNav.selector + ':hover').length) {
+                subNav.hide();
+                $(this).removeClass('active');
+            }
+        });
 
-                if (subNav.is(':visible') || mainNav.hasClass('active')) {
-                    subNav.hide();
-                    mainNav.removeClass('active');
-                }
-            });
+
+        subNav.hover(function () {}, function () {
+            var onMainCur = $(mainNav.selector + ':hover').length ?
+                            $(mainNav.selector + ':hover').hasClass('active') : false;
+                
+            if (!onMainCur) {
+                $(this).hide();
+                mainNav.removeClass('active');
+            }
+        });
 
         }
     };
