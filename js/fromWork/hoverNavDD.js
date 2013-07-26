@@ -71,36 +71,43 @@ var GlobalNav = function () {
         mouseDevice: function () {
             //console.log('is mouse device');
 
-        mainNav.hoverIntent({
-            over: function () {
-                var nextSubNav = $('header .hdrNav3 .page').find('ul:eq(' + ($(this).index() + 1) + ')');
-
-                if (nextSubNav.html().length) {
-                    nextSubNav.slideDown();
-                    $(this).addClass('active');
+            mainNav.hoverIntent({
+                over: function () {
+                    var nextSubNav = $('header .hdrNav3 .page').find('ul:eq(' + ($(this).index() + 1) + ')');
+    
+                    if (nextSubNav.html().length) {
+                        nextSubNav.slideDown();
+                        $(this).addClass('active');
+                    }
+                },
+                out: function () {},
+                interval: 30
+            });
+    
+            mainNav.hover(function () { }, function () {
+                var that = $(this);
+    
+                setTimeout(function () {
+                    if (!$(subNav.selector + ':hover').length) {
+                        subNav.hide();
+                        that.removeClass('active');
+                    }
+                }, 20);
+            });
+    
+    
+            subNav.hover(function () {}, function () {
+                var onMainCur = $(mainNav.selector + ':hover').length ?
+                                $(mainNav.selector + ':hover').hasClass('active') : false;
+                    
+                if (!onMainCur) {
+                    $(this).hide();
+                    mainNav.removeClass('active');
                 }
-            },
-            out: function () {},
-            interval: 30
-        });
-
-        mainNav.hover(function () { }, function () {
-            if (!$(subNav.selector + ':hover').length) {
-                subNav.hide();
-                $(this).removeClass('active');
-            }
-        });
-
-
-        subNav.hover(function () {}, function () {
-            var onMainCur = $(mainNav.selector + ':hover').length ?
-                            $(mainNav.selector + ':hover').hasClass('active') : false;
-                
-            if (!onMainCur) {
-                $(this).hide();
-                mainNav.removeClass('active');
-            }
-        });
+                else {
+                    console.log('edge case');
+                }
+            });
 
         }
     };
