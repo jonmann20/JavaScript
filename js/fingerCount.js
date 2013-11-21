@@ -36,43 +36,26 @@ function count(n) {
     // 2 == 10
     // ...
 
-
-    while (n >= 9)
-        n -= 8;
-
-
-    var finger = "";
+    n = n % 8;
 
     switch(n){
         case 1: 
-            finger = "thumb"; 
-            break;
+            return "thumb"; 
         case 2: 
         case 8: 
-            finger = "index";
-            break;
+            return "index";
         case 3: 
         case 7: 
-            finger = "middle"; 
-            break;
+            return "middle"; 
         case 4: 
         case 6: 
-            finger = "ring"; 
-            break;
+            return "ring"; 
         case 5:
-            finger = "pinky";
-            break;
+            return "pinky";
     }
-
-    return {
-        n: n,
-        finger: finger
-    };
-
-
 }
 
 console.log(
-    count(49),
-    list[49]
+    count(12),
+    list[12]
 );
