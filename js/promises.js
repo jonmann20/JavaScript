@@ -6,17 +6,14 @@ function View(bgColor) {
 View.prototype = (function () {
 
     return {
-        doResolve: null,
-
-        // alias for promise
-        then: function (r) {
-            this.doResolve = r;
+        then: function (callback) {
+            this.then = callback;
         },
 
         update: function () {
             console.log(this.x);
             if (this.x++ === 5) {
-                this.doResolve();
+                this.then();
             }
         },
 
