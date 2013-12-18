@@ -1,52 +1,56 @@
-// polyfill: https://github.com/jakearchibald/ES6-Promises/blob/master/README.md
 function View(bgColor) {
     this.bgColor = bgColor;
+    this.x = 0;
 }
 
 View.prototype = (function () {
-    var then;
-    var x = 0;
-
-    var p = new Promise(function (r) {
-        then = r;
-    })
 
     return {
+        doResolve: null,
+
+        // alias for promise
+        then: function (r) {
+            this.doResolve = r;
+        },
+
         update: function () {
-            //console.log(x);
-            if (x++ === 30) {
-                then();
+            console.log(this.x);
+            if (this.x++ === 5) {
+                this.doResolve();
             }
         },
 
         render: function () {
+            console.log(this.bgColor);
             document.body.style.backgroundColor = this.bgColor;
-        },
-
-        // alias for promise
-        then: function(r){
-            p.then(r);
         }
     };
 })();
 
 
-// old way
-//var view = new View(function () {
-//    console.log("hit");
-//    clearInterval(inter);
-//});
-
-var view = new View("orange");
-view.render();
-
-// more things here
-
-view.then(function () {
-    clearInterval(inter);
-    view = new View("red");
+var title = new View("red");
+title.then(function () {
+    console.log("inRed");
+    view = lvl;
     view.render();
 });
 
-var inter = setInterval(view.update, 1000 / 10);
-//console.log(view);
+var lvl = new View("orange");
+lvl.then(function () {
+    console.log("inOrange");
+    view = last;
+    view.render();
+});
+
+var last = new View("purple");
+last.then(function () {
+    console.log("inPurple");
+    clearInterval(inter);
+});
+
+
+var view = title;
+view.render();
+var inter = setInterval(function () {
+    view.update()
+}, 1000 / 3);
