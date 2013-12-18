@@ -1,24 +1,26 @@
 function View(bgColor) {
+    // public data and methods
     this.bgColor = bgColor;
     this.x = 0;
 }
 
 View.prototype = (function () {
+    // static private data and methods
 
+    // public data and methods (that need access to privates)
     return {
+        // promises hack
         then: function (callback) {
             this.then = callback;
         },
 
         update: function () {
-            console.log(this.x);
-            if (this.x++ === 5) {
+            if (this.x++ === 30) {
                 this.then();
             }
         },
 
         render: function () {
-            console.log(this.bgColor);
             document.body.style.backgroundColor = this.bgColor;
         }
     };
@@ -27,22 +29,21 @@ View.prototype = (function () {
 
 var title = new View("red");
 title.then(function () {
-    console.log("inRed");
     view = lvl;
     view.render();
 });
 
 var lvl = new View("orange");
 lvl.then(function () {
-    console.log("inOrange");
     view = last;
     view.render();
 });
 
 var last = new View("purple");
 last.then(function () {
-    console.log("inPurple");
-    clearInterval(inter);
+    title.x = lvl.x = last.x = 0;
+    view = title;
+    view.render();
 });
 
 
@@ -50,4 +51,4 @@ var view = title;
 view.render();
 var inter = setInterval(function () {
     view.update()
-}, 1000 / 3);
+}, 1000 / 60);
