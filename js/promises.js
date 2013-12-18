@@ -1,3 +1,4 @@
+// polyfill: https://github.com/jakearchibald/ES6-Promises/blob/master/README.md
 function View(bgColor) {
     this.bgColor = bgColor;
 }
@@ -5,6 +6,10 @@ function View(bgColor) {
 View.prototype = (function () {
     var then;
     var x = 0;
+
+    var p = new Promise(function (r) {
+        then = r;
+    })
 
     return {
         update: function () {
@@ -18,9 +23,10 @@ View.prototype = (function () {
             document.body.style.backgroundColor = this.bgColor;
         },
 
-        p: new Promise(function (resolve) {
-            then = resolve;
-        })
+        // alias for promise
+        then: function(r){
+            p.then(r);
+        }
     };
 })();
 
@@ -36,7 +42,7 @@ view.render();
 
 // more things here
 
-view.p.then(function () {
+view.then(function () {
     clearInterval(inter);
     view = new View("red");
     view.render();
