@@ -13,8 +13,8 @@ function SportsCar(car){
 		car = new Car();
 	}
 	
+	this.super = car;
 	extend(this, car);
-	this.init(car);
 }
 
 SportsCar.prototype = (function(){
@@ -25,13 +25,9 @@ SportsCar.prototype = (function(){
 		hasSpoiler: false,
 		
 
-		init: function(car){
-			legalGuardian = car;
-		},
-
 		// override
 		determinePrice: function(){
-			console.log("legal: " + legalGuardian.determinePrice());
+			console.log("legal: " + this.super.determinePrice());
 			return 25;
 		}
 	};
