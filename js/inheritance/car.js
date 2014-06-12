@@ -1,6 +1,4 @@
 function Car(color){
-	this.getName = "Car";
-
 	this.color = color || "#fff";
 }
 
@@ -8,6 +6,7 @@ Car.prototype = (function(){
 	var isMoving = false;
 
 	return {
+		getName: "Car",
 		color: "",
 
 

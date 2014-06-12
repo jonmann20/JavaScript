@@ -7,24 +7,31 @@ function extend(childInstance, parentInstance){
 	}
 }
 
+// SportsCar extends Car
 function SportsCar(car){
-	this.getName = "SportsCar";
-
 	if(typeof(car) === "undefined" || car.getName !== "Car"){
 		car = new Car();
 	}
 	
-	this.super = car;
 	extend(this, car);
+	this.init(car);
 }
 
 SportsCar.prototype = (function(){
+	var legalGuardian;
+
 	return {
+		getName: "SportsCar",
 		hasSpoiler: false,
+		
+
+		init: function(car){
+			legalGuardian = car;
+		},
 
 		// override
 		determinePrice: function(){
-			//console.log(this.super.determinePrice());
+			console.log("legal: " + legalGuardian.determinePrice());
 			return 25;
 		}
 	};
