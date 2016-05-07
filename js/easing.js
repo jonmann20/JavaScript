@@ -1,0 +1,1 @@
+value += (target - value) / strength
