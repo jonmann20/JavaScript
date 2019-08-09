@@ -1,9 +1,49 @@
-Node = function (a, b) {
-    return {
-        val: a,
-        next: b
-    }
-}
+	class Node {
+		constructor(val, next) {
+			this.val = val;
+			this.next = next;
+		}
+	}
+
+	function print(node) {
+		console.log('NodeList');
+		
+		do {
+			console.log(' ', node.val);
+		}
+		while(node = node.next);
+	}
+
+	function reverse(node) {
+		let i = node;
+		let j = node.next;
+		let prev = i;
+		let next;
+
+		i.next = undefined;  // point at previous node
+
+		while(j) { // not at end of list
+			console.log(i, j);
+
+			next = j.next;
+			j.next = i; // point at previous node
+
+			i = j;
+			j = next;
+			prev = i;
+		}
+
+		return prev;
+	}
+
+
+	let c = new Node('c');
+	let b = new Node('b', c);
+	let a = new Node('a', b);
+
+	print(a);
+	let newHead = reverse(a);
+	print(newHead);
 
 linkedListAlgorithms = function () {
 	return {
